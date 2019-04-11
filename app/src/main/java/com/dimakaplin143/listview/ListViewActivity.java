@@ -1,18 +1,18 @@
 package com.dimakaplin143.listview;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 public class ListViewActivity extends AppCompatActivity {
 
@@ -20,20 +20,20 @@ public class ListViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view);
-        //Toolbar toolbar = findViewById(R.id.toolbar);
-       // setSupportActionBar(toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         ListView list = findViewById(R.id.list);
 
         List<Map<String, String>> values = prepareContent();
 
-        SimpleAdapter listContentAdapter = createAdapter(values);
+        BaseAdapter listContentAdapter = createAdapter(values);
 
         list.setAdapter(listContentAdapter);
     }
 
     @NonNull
-    private SimpleAdapter createAdapter(List<Map<String, String>> data) {
+    private BaseAdapter createAdapter(List<Map<String, String>> data) {
         return new SimpleAdapter(this, data, R.layout.simple_adapte_text, new String[] {"title", "sub-title"}, new int[] {R.id.title, R.id.sub_title});
     }
 
